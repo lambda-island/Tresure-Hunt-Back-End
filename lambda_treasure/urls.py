@@ -11,7 +11,6 @@ from .views import testing
 
 urlpatterns = [
     path('', testing, name='testing'),
-    path('api/', include('api.urls')),
     path('admin/', admin.site.urls),
     path('api/auth/',
          TokenObtainPairView.as_view(),
@@ -22,4 +21,5 @@ urlpatterns = [
     path('api/auth/refresh/',
          TokenRefreshView.as_view(),
          name="token-refresh"),
+    path('api/game/', include('api.urls')),
 ]
