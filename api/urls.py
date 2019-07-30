@@ -1,7 +1,7 @@
 from django.urls import path
 
-from . import views
+from .views import init
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('init', init, name='game-init'),
 ]
