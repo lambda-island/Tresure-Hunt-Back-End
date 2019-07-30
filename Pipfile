@@ -12,6 +12,8 @@ requests = "*"
 django-heroku = "*"
 gunicorn = "*"
 djangorestframework = "*"
+djangorestframework-simplejwt = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.7"
