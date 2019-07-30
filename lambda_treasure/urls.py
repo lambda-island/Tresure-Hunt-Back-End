@@ -7,7 +7,10 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 
+from .views import testing
+
 urlpatterns = [
+    path('', testing, name='testing'),
     path('api/', include('api.urls')),
     path('admin/', admin.site.urls),
     path('api/auth/',
