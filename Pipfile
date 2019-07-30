@@ -11,6 +11,7 @@ psycopg2 = "*"
 requests = "*"
 django-heroku = "*"
 gunicorn = "*"
+djangorestframework = "*"
 
 [requires]
 python_version = "3.7"
