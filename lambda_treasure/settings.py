@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
     'user_profiles',
     'api'
 ]
@@ -75,8 +76,8 @@ DATABASES = {
         'NAME': 'lambda_island',
         'USER': 'dylan',
         'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'HOST': os.getenv("DATABASE_URL") or 'local',
+        'PORT': os.getenv("PORT") or '5432'
     }
 }
 
