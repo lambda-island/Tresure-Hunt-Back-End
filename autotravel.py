@@ -539,9 +539,9 @@ while True:
         print(direction[0])
 
     current_room = res['room_id']
-    next_room = data[str(current_room)][1][direction[0]]
+    # next_room = data[str(current_room)][1][direction[0]]
 
-    print("next room", next_room)
+    # print("next room", next_room)
 
     data = {
         "direction": direction[0],
@@ -550,4 +550,4 @@ while True:
     res = requests.post(f"{BASE_URL}/move", headers=headers, json=data)
     print(res.json())
 
-    time.sleep(20)
+    time.sleep(30)
