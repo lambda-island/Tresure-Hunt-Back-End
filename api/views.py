@@ -4,16 +4,8 @@ from rest_framework.response import Response
 import requests
 
 from user_profiles.models import Profile
+from api.models import Room
 
-SHOP_ROOM_ID = 1
-
-
-PENALTY_COOLDOWN_VIOLATION = 5
-PENALTY_NOT_FOUND = 5
-PENALTY_CANNOT_MOVE_THAT_WAY = 5
-
-MIN_COOLDOWN = 1
-MAX_COOLDOWN = 600
 
 BASE_URL = 'https://lambda-treasure-hunt.herokuapp.com/api/adv/'
 
@@ -39,3 +31,4 @@ def move(request):
     response = requests.post(f'{BASE_URL}/move', headers=headers, json=data)
 
     return Response(response.json())
+
