@@ -21,5 +21,5 @@ urlpatterns = [
     path('api/auth/refresh/',
          TokenRefreshView.as_view(),
          name="token-refresh"),
-    path('api/game/', include('api.urls')),
+    path('api/game/', include('api.urls'))
 ]
