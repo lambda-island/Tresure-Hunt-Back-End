@@ -1,9 +1,9 @@
-import requests
-import json
-import time
+from graph import Graph, Room, Player
+from world import World
+from queue import Queue, LifoQueue
 import random
 
-island = {
+data = {
     '0': [{'x': 60, 'y': 60}, {'n': 10, 's': 2, 'e': 4, 'w': 1}],
     '1': [{'x': 59, 'y': 60}, {'e': 0}],
     '2': [{'x': 60, 'y': 59}, {'n': 0, 's': 6, 'e': 3}],
@@ -507,71 +507,10 @@ island = {
 }
 
 
-BASE_URL = 'http://127.0.0.1:8000/api/game'
 
-token = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNTY3MTQ0NzY0LCJqdGkiOiI1MWQxZDUyMGU0MTU0ZTAwYmIzNWM5YmVjY2JjNDgzMCIsInVzZXJfaWQiOjF9.bhIxQlyUVcXnWj7KDIGwx-s7CeqlVq-6hjqW8NplDn8'
-
-headers = {
-    "Authorization": token
-}
-
-while True:
-    print("loop start")
-
-    res = requests.get(f"{BASE_URL}/init", headers=headers)
-    res = res.json()
-
-    print("response", res)
-    print("cool", res['cooldown'])
-    time.sleep(res['cooldown'])
-
-    # if res['items'] != []:
-    #     # pick up treasure with take endpoint
-
-    # if res['messages'] != []:
-    #     break
-
-    current_room = res['room_id']
-
-    current_room_json = {
-        "current_room": current_room
-    }
-
-    db_exits = requests.post(f"{BASE_URL}/check_exits", headers=headers, json=current_room_json)
-    print("connections", db_exits.json())
-
-    db_exits = db_exits.json()
-
-    exits = []
-    for exit in db_exits:
-        if exit in res['exits']:
-            if len(res['exits']) == 1:
-                exits.append(exit)
-                print("only 1")
-                break
-            elif db_exits[exit] is None:
-                exits.append(exit)
-
-    direction = random.sample(exits, 1)
-    print("going", direction[0])
-    try:
-        next_room = island[str(current_room)][1][direction[0]]
-        print("next room", next_room)
-
-        data = {
-            "direction": direction[0],
-            "next_room_id": str(next_room)
-        }
-    except:
-        print('not giving next room')
-        data = {
-            "direction": direction[0]
-        }
-
-    res = requests.post(f"{BASE_URL}/move", headers=headers, json=data)
-    res = res.json()
-    print(res)
-    cd = res['cooldown']
-    print("coolio", cd)
-
-    time.sleep(cd)
+world = World()
+breakpoint()
+world.loadGraph(data)
+world.printRooms()
+player = Player("Name", world.startingRoom)
+graph = Graph()

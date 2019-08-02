@@ -22,7 +22,7 @@ def init(request):
     response = response.json()
 
     # player = Player(current_room=response['room_id'])
-    # player.save()
+    # player.save
 
     return Response(response)
 
@@ -33,6 +33,7 @@ def move(request):
     headers = {
         'Authorization': f'Token {user.api_token}'
     }
+
     data = request.data
 
     response = requests.post(f'{BASE_URL}/move', headers=headers, json=data)
@@ -53,7 +54,8 @@ def move(request):
     player = Player.objects.get(id=1)
 
     # connect room
-    room.connectRooms(data['direction'], player.current_room, response['room_id'])
+    room.connectRooms(data['direction'],
+                      player.current_room, response['room_id'])
     # update room
     room.save()
 
@@ -187,3 +189,18 @@ def dash(request):
     response = requests.post(f'{BASE_URL}/dash', headers=headers, data=data)
 
     return Response(response.json())
+
+
+@api_view(['POST'])
+def check_exits(request):
+    user = Profile.objects.filter(user__username=request.user).first()
+
+    data = request.data
+    room = Room.objects.get(id=data['current_room'])
+    exits = {
+        'n': room.n_to,
+        'e': room.e_to,
+        's': room.s_to,
+        'w': room.w_to,
+    }
+    return Response(exits)

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import init, move, take, drop, sell, confirm_sell, status, examine, change_name, pray, flight, dash
+from .views import init, move, take, drop, sell, confirm_sell, status, examine, change_name, pray, flight, dash, check_exits
 
 urlpatterns = [
     path('init', init, name='game-init'),
@@ -15,4 +15,5 @@ urlpatterns = [
     path('pray', pray, name="game-pray"),
     path('fly', flight, name="game-fly"),
     path('dash', dash, name="game-dash"),
+    path('check_exits', check_exits, name="check-exits")
 ]
