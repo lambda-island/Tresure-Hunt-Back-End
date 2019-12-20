@@ -9,9 +9,9 @@ import sys
 def proof_of_work(last_proof):
     """
     Simple Proof of Work Algorithm
-    - Find a number p' such that hash(pp') contains 6 leading
-    zeroes, where p is the previous p'
-    - p is the previous proof, and p' is the new proof
+    - Find a number proof such that hash(proof') contains 6 leading
+    zeroes, where proof is the previous proof '
+    - proof is the previous proof, and proof' is the new proof
     """
 
     print("Searching for next proof")
